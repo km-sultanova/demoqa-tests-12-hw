@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selectors.by;
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
 public class TextBoxTests {
@@ -24,11 +25,14 @@ public class TextBoxTests {
         String firstName = "first";
         String lastName = "last";
         String email = "mail@mail.com";
+        String gender = "Female";
         String mobile = "7778889911";
         String date = "29 November,1992";
         Integer month = 10;
         Integer year = 92;
         String subjects = "English";
+        String hobbie1 = "Reading";
+        String hobbie2 = "Music";
         String currentAddress = "address";
         String state = "NCR";
         String city = "Delhi";
@@ -39,23 +43,23 @@ public class TextBoxTests {
         Selenide.executeJavaScript("document.getElementById('fixedban').hidden = 'true'");
         executeJavaScript("$('footer').remove()");
 
-        $("[id=firstName]").setValue(firstName);
-        $("[id=lastName]").setValue(lastName);
-        $("[id=userEmail]").setValue(email);
-        $(by("for", "gender-radio-2")).click();
-        $("[id=userNumber]").setValue(mobile);
-        $("[id=subjectsInput]").setValue(subjects).pressEnter();
-        $(by("for", "hobbies-checkbox-2")).click();
-        $(by("for", "hobbies-checkbox-3")).click();
-        $("[id=currentAddress]").setValue(currentAddress);
-        File catImage = $("#uploadPicture").uploadFromClasspath(image);
-        $("[id=react-select-3-input]").setValue(state).pressEnter();
-        $("[id=react-select-4-input]").setValue(city).pressEnter();
-        $("[id=dateOfBirthInput]").click();
-        $("[class=react-datepicker__month-select]").selectOption(month);
-        $("[class=react-datepicker__year-select]").selectOption(year);
+        $("#firstName").setValue(firstName);
+        $("#lastName").setValue(lastName);
+        $("#userEmail").setValue(email);
+        $("#genterWrapper").$(byText(gender)).click();
+        $("#userNumber").setValue(mobile);
+        $("#subjectsInput").setValue(subjects).pressEnter();
+        $("#hobbiesWrapper").$(byText(hobbie1)).click();
+        $("#hobbiesWrapper").$(byText(hobbie2)).click();
+        $("#currentAddress").setValue(currentAddress);
+        $("#uploadPicture").uploadFromClasspath(image);
+        $("#react-select-3-input").setValue(state).pressEnter();
+        $("#react-select-4-input").setValue(city).pressEnter();
+        $("#dateOfBirthInput").click();
+        $(".react-datepicker__month-select").selectOption(month);
+        $(".react-datepicker__year-select").selectOption(year);
         $(by("aria-label", "Choose Sunday, November 29th, 1992")).click();
-        $("[id=submit]").click();
+        $("#submit").click();
 
         // Asserts
         $(".table-responsive").shouldHave(text("Student Name	" + firstName + " " + lastName),
