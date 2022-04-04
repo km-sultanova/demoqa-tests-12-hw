@@ -1,20 +1,16 @@
 package guru.qa;
 
-import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Configuration;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.by;
 
-import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
-import java.util.List;
 
-import static com.codeborne.selenide.Selectors.byCssSelector;
 import static com.codeborne.selenide.Selenide.*;
 
 public class TextBoxTests {
@@ -44,7 +40,6 @@ public class TextBoxTests {
 
         open("/automation-practice-form");
 
-        System.out.println("before selector");
         Selenide.executeJavaScript("document.getElementById('fixedban').hidden = 'true'");
         executeJavaScript("$('footer').remove()");
 
@@ -72,8 +67,5 @@ public class TextBoxTests {
                 text("Mobile " + mobile), text("Picture	" + image), text("Student Email " + email),
                 text("Gender Female"), text("Date of Birth " + date), text("Subjects " + subjects),
                 text("Hobbies Reading, Music"), text("Address " + currentAddress), text("State and City " + state + " " + city));
-
-
-        System.out.println("after selector");
     }
 }
