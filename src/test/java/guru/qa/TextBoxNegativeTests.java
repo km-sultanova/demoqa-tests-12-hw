@@ -11,7 +11,7 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class TextBoxNegativeTests {
     @BeforeAll
-    static void setUp(){
+    static void setUp() {
         Configuration.holdBrowserOpen = true;
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.browserSize = "1920x1080";
@@ -19,7 +19,7 @@ public class TextBoxNegativeTests {
     }
 
     @Test
-    void checkFormValidation(){
+    void checkFormValidation() {
         open("/automation-practice-form");
 
         Selenide.executeJavaScript("document.getElementById('fixedban').hidden = 'true'");
@@ -32,7 +32,7 @@ public class TextBoxNegativeTests {
     }
 
     @Test
-    void checkPhoneNumberValidation(){
+    void checkPhoneNumberValidation() {
         String correctMobile = "7778889911";
         String inCorrectMobile = "777888991100";
 

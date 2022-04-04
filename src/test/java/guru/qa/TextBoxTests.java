@@ -1,30 +1,26 @@
 package guru.qa;
 
+import java.io.File;
 import com.codeborne.selenide.Configuration;
-
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selectors.by;
-
 import com.codeborne.selenide.Selenide;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
-
+import static com.codeborne.selenide.Selectors.by;
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
 
 public class TextBoxTests {
     @BeforeAll
-    static void setUp(){
+    static void setUp() {
         Configuration.holdBrowserOpen = true;
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.browserSize = "1920x1080";
         Configuration.pageLoadTimeout = 45000;
     }
 
-
     @Test
-    void fillFormTest(){
+    void fillFormTest() {
         String firstName = "first";
         String lastName = "last";
         String email = "mail@mail.com";
@@ -62,7 +58,6 @@ public class TextBoxTests {
         $("[id=submit]").click();
 
         // Asserts
-
         $(".table-responsive").shouldHave(text("Student Name	" + firstName + " " + lastName),
                 text("Mobile " + mobile), text("Picture	" + image), text("Student Email " + email),
                 text("Gender Female"), text("Date of Birth " + date), text("Subjects " + subjects),
