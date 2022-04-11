@@ -47,6 +47,7 @@ public class TextBoxTests {
         $("#lastName").setValue(lastName);
         $("#userEmail").setValue(email);
         $("#genterWrapper").$(byText(gender)).click();
+
         $("#userNumber").setValue(mobile);
         $("#subjectsInput").setValue(subjects).pressEnter();
         $("#hobbiesWrapper").$(byText(hobbie1)).click();
@@ -68,3 +69,4 @@ public class TextBoxTests {
                 text("Hobbies Reading, Music"), text("Address " + currentAddress), text("State and City " + state + " " + city));
     }
 }
+
