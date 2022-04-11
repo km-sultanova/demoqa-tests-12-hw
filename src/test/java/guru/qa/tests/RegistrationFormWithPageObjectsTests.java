@@ -14,17 +14,30 @@ public class RegistrationFormWithPageObjectsTests {
     String email = "mail@mail.com";
     String gender = "Female";
     String mobile = "7778889911";
-    String date = "29 November,1992";
     String day = "29";
     String month = "November";
     String year = "1992";
     String subjects = "English";
-    String hobbie1 = "Reading";
-    String hobbie2 = "Music";
+    String hobby1 = "Reading";
+    String hobby2 = "Music";
     String currentAddress = "address";
     String state = "NCR";
     String city = "Delhi";
     String image = "catImage.jpeg";
+
+    //table
+    String tableFirstColumnName = "Label";
+    String tableSecondColumnName = "Values";
+    String tableStudentName = "Student Name";
+    String tableEmail = "Student Email";
+    String tableGender = "Gender";
+    String tableMobile = "Mobile";
+    String tableDateOfBirth = "Date of Birth";
+    String tableSubjects = "Subjects";
+    String tableHobbies = "Hobbies";
+    String tablePicture = "Picture";
+    String tableAddress = "Address";
+    String tableStateAndCity = "State and City";
 
     @BeforeAll
     static void setUp(){
@@ -43,19 +56,26 @@ public class RegistrationFormWithPageObjectsTests {
                 .setUserNumber(mobile)
                 .setBirthDate(day, month, year)
                 .setSubjects(subjects)
-                .setHobby(hobbie1)
-                .setHobby(hobbie2)
+                .setHobby(hobby1)
+                .setHobby(hobby2)
                 .uploadPicture(image)
                 .setAddress(currentAddress)
                 .setState(state)
                 .setCity(city)
                 .clickSubmit();
 
-
-        registrationFormPage.checkResult("Student name", "Karina S");
-        registrationFormPage.checkResult("Student email", "s");
-        registrationFormPage.checkResult("Gender", "Female");
-
+        registrationFormPage
+                .checkResult(tableFirstColumnName, tableSecondColumnName)
+                .checkResult(tableStudentName, firstName + " " + lastName)
+                .checkResult(tableEmail, email)
+                .checkResult(tableGender, gender)
+                .checkResult(tableMobile, mobile)
+                .checkResult(tableDateOfBirth, day + " " + month + "," + year)
+                .checkResult(tableSubjects, subjects)
+                .checkResult(tableHobbies, hobby1 + ", " + hobby2)
+                .checkResult(tablePicture, image)
+                .checkResult(tableAddress, currentAddress)
+                .checkResult(tableStateAndCity, state + " " + city);
 
     }
 }

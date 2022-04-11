@@ -11,26 +11,31 @@ import static com.codeborne.selenide.Selenide.*;
 public class RegistrationFormPage {
     CalendarComponent calendar = new CalendarComponent();
     // locators
-    SelenideElement firstNameInput      =    $("#firstName");
-    SelenideElement lastNameInput       =    $("#lastName");
-    SelenideElement emailInput          =    $("#userEmail");
-    SelenideElement genderInput         =    $("#genterWrapper");
-    SelenideElement dateOfBirthClick    =    $("#dateOfBirthInput");
-    SelenideElement userNumberInput     =    $("#userNumber");
-    SelenideElement subjectsInput       =    $("#subjectsInput");
-    SelenideElement hobbiesInput        =    $("#hobbiesWrapper");
-    SelenideElement pictureInput        =    $("#uploadPicture");
-    SelenideElement addressInput        =    $("#currentAddress");
-    SelenideElement stateInput          =    $("#stateCity-wrapper");
-    SelenideElement stateClick          =    $("#state");
-    SelenideElement cityClick           =    $("#city");
-    SelenideElement submitClick         =    $("#submit");
+    SelenideElement formNameField    =    $(".practice-form-wrapper");
+    SelenideElement firstNameInput   =    $("#firstName");
+    SelenideElement lastNameInput    =    $("#lastName");
+    SelenideElement emailInput       =    $("#userEmail");
+    SelenideElement genderInput      =    $("#genterWrapper");
+    SelenideElement dateOfBirthClick =    $("#dateOfBirthInput");
+    SelenideElement userNumberInput  =    $("#userNumber");
+    SelenideElement subjectsInput    =    $("#subjectsInput");
+    SelenideElement hobbiesInput     =    $("#hobbiesWrapper");
+    SelenideElement pictureInput     =    $("#uploadPicture");
+    SelenideElement addressInput     =    $("#currentAddress");
+    SelenideElement stateInput       =    $("#stateCity-wrapper");
+    SelenideElement stateClick       =    $("#state");
+    SelenideElement cityClick        =    $("#city");
+    SelenideElement submitClick      =    $("#submit");
+    SelenideElement tableCheck       =    $(".table-responsive");
+
+    //
+    String formName = "Student Registration Form";
 
 
     //actions
     public RegistrationFormPage openPage(){
         open("/automation-practice-form");
-        $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
+        formNameField.shouldHave(text(formName));
         Selenide.executeJavaScript("document.getElementById('fixedban').hidden = 'true'");
         executeJavaScript("$('footer').remove()");
 
@@ -100,13 +105,12 @@ public class RegistrationFormPage {
         return this;
     }
 
-    public RegistrationFormPage clickSubmit() {
+    public void clickSubmit() {
         submitClick.click();
-        return this;
     }
 
     public RegistrationFormPage checkResult(String key, String value){
-        $(".table-responsive").$(byText(key)).parent().shouldHave(text(value));
+        tableCheck.$(byText(key)).parent().shouldHave(text(value));
         return this;
     }
 }
