@@ -4,12 +4,13 @@ import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import guru.qa.pages.components.CalendarComponent;
 
-import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
 public class RegistrationFormPage {
     CalendarComponent calendar = new CalendarComponent();
+
     // locators
     SelenideElement formNameField    =    $(".practice-form-wrapper");
     SelenideElement firstNameInput   =    $("#firstName");
@@ -28,7 +29,7 @@ public class RegistrationFormPage {
     SelenideElement submitClick      =    $("#submit");
     SelenideElement tableCheck       =    $(".table-responsive");
 
-    //
+    // first form name
     String formName = "Student Registration Form";
 
 
@@ -111,6 +112,17 @@ public class RegistrationFormPage {
 
     public RegistrationFormPage checkResult(String key, String value){
         tableCheck.$(byText(key)).parent().shouldHave(text(value));
+        return this;
+    }
+
+    // для класса TextBoxNegativeTests
+    public RegistrationFormPage checkNegativeResult(String selector, String value){
+        $(selector).shouldHave(value(value));
+        return this;
+    }
+
+    public RegistrationFormPage checkNegativeResult(String selector, String attrName, String attrValue){
+        $(selector).shouldHave(attribute(attrName, attrValue));
         return this;
     }
 }

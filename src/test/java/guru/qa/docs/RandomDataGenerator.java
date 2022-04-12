@@ -43,7 +43,6 @@ public class RandomDataGenerator {
     }
 
 
-    //date
     public String getDay(){
         //return String.valueOf(calendar.get(Calendar.DAY_OF_MONTH));
         return String.valueOf(localDate.getDayOfMonth());
@@ -60,8 +59,6 @@ public class RandomDataGenerator {
         return String.valueOf(localDate.getYear());
     }
 
-
-    //subjects
 
     public String getSubject(){
         int el = new Random().nextInt(Subjects.values().length);

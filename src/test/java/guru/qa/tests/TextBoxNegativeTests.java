@@ -1,15 +1,17 @@
 package guru.qa.tests;
 
 import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.Selenide;
+import guru.qa.docs.RandomDataGenerator;
+import guru.qa.pages.RegistrationFormPage;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Condition.attribute;
-import static com.codeborne.selenide.Condition.value;
-import static com.codeborne.selenide.Selenide.*;
 
 public class TextBoxNegativeTests {
+
+    RegistrationFormPage registrationFormPage = new RegistrationFormPage();
+    RandomDataGenerator generator = new RandomDataGenerator();
+
     @BeforeAll
     static void setUp() {
         Configuration.holdBrowserOpen = true;
@@ -19,30 +21,20 @@ public class TextBoxNegativeTests {
 
     @Test
     void checkFormValidation() {
-        open("/automation-practice-form");
+        registrationFormPage.openPage().clickSubmit();
 
-        Selenide.executeJavaScript("document.getElementById('fixedban').hidden = 'true'");
-        executeJavaScript("$('footer').remove()");
-
-        $("[id=submit]").click();
-
-        // Asserts
-        $("#userForm").shouldHave(attribute("class", "was-validated"));
+        //$("#userForm").shouldHave(attribute("class", "was-validated"));
+        registrationFormPage.checkNegativeResult("#userForm", "class", "was-validated");
     }
 
     @Test
     void checkPhoneNumberValidation() {
-        String correctMobile = "7778889911";
-        String inCorrectMobile = "777888991100";
+        String correctMobile = generator.getPhoneNumber();
+        String inCorrectMobile = correctMobile + "0";
 
-        open("/automation-practice-form");
+        registrationFormPage.openPage().setUserNumber(inCorrectMobile);
 
-        Selenide.executeJavaScript("document.getElementById('fixedban').hidden = 'true'");
-        executeJavaScript("$('footer').remove()");
-
-        $("[id=userNumber]").setValue(inCorrectMobile);
-
-        // Asserts
-        $("#userNumber").shouldHave(value(correctMobile));
+        //$("#userNumber").shouldHave(value(correctMobile));
+        registrationFormPage.checkNegativeResult("#userNumber", correctMobile);
     }
 }
