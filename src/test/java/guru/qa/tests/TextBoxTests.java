@@ -1,4 +1,4 @@
-package guru.qa;
+package guru.qa.tests;
 
 import java.io.File;
 import com.codeborne.selenide.Configuration;

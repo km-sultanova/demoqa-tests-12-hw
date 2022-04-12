@@ -1,6 +1,7 @@
 package guru.qa.tests;
 
 import com.codeborne.selenide.Configuration;
+import guru.qa.docs.RandomDataGenerator;
 import guru.qa.pages.RegistrationFormPage;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -8,21 +9,21 @@ import org.junit.jupiter.api.Test;
 public class RegistrationFormWithPageObjectsTests {
 
     RegistrationFormPage registrationFormPage = new RegistrationFormPage();
+    RandomDataGenerator generator = new RandomDataGenerator();
 
-    String firstName = "first";
-    String lastName = "last";
-    String email = "mail@mail.com";
-    String gender = "Female";
-    String mobile = "7778889911";
-    String day = "29";
-    String month = "November";
-    String year = "1992";
-    String subjects = "English";
-    String hobby1 = "Reading";
-    String hobby2 = "Music";
-    String currentAddress = "address";
-    String state = "NCR";
-    String city = "Delhi";
+    String firstName = generator.getFirstName();
+    String lastName = generator.getLastName();
+    String email = generator.getEmail();
+    String gender = generator.getGender();
+    String mobile = generator.getPhoneNumber();
+    String day = generator.getDay();
+    String month = generator.getMonth();
+    String year = generator.getYear();
+    String subjects = generator.getSubject();
+    String hobby = generator.getHobby();
+    String currentAddress = generator.getAddress();
+    String state = generator.getState();
+    String city = generator.getCity(state);
     String image = "catImage.jpeg";
 
     //table
@@ -41,7 +42,7 @@ public class RegistrationFormWithPageObjectsTests {
 
     @BeforeAll
     static void setUp(){
-        Configuration.holdBrowserOpen = true;
+        //Configuration.holdBrowserOpen = true;
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.browserSize = "1920x1080";
     }
@@ -54,14 +55,13 @@ public class RegistrationFormWithPageObjectsTests {
                 .setEmail(email)
                 .setGender(gender)
                 .setUserNumber(mobile)
-                .setBirthDate(day, month, year)
                 .setSubjects(subjects)
-                .setHobby(hobby1)
-                .setHobby(hobby2)
+                .setHobby(hobby)
                 .uploadPicture(image)
                 .setAddress(currentAddress)
                 .setState(state)
                 .setCity(city)
+                .setBirthDate(day, month, year)
                 .clickSubmit();
 
         registrationFormPage
@@ -72,10 +72,12 @@ public class RegistrationFormWithPageObjectsTests {
                 .checkResult(tableMobile, mobile)
                 .checkResult(tableDateOfBirth, day + " " + month + "," + year)
                 .checkResult(tableSubjects, subjects)
-                .checkResult(tableHobbies, hobby1 + ", " + hobby2)
+                .checkResult(tableHobbies, hobby)
                 .checkResult(tablePicture, image)
                 .checkResult(tableAddress, currentAddress)
                 .checkResult(tableStateAndCity, state + " " + city);
 
     }
 }
+
+
